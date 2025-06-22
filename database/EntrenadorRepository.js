@@ -35,6 +35,17 @@ export const getEntrenadores = async () => {
   return rows;
 };
 
+export const getEntrenadoresSinEquipo = async () => {
+  const db = await getConnection();
+  const rows = await db.getAllAsync(`
+    SELECT e.*
+    FROM entrenador e
+    LEFT JOIN equipo eq ON e.id = eq.entrenadorID
+    WHERE eq.entrenadorID IS NULL
+  `);
+  return rows;
+}
+
 export const getEntrenadorId = async (id) => {
   const db = await getConnection();
   const row = await db.getAll('SELECT * FROM entrenador WHERE id = ?', [id]);

@@ -97,3 +97,11 @@ export const getEquiposPartidos = async (id) => {
   console.log(rows);
   return rows;
 }
+
+export const addEquipo = async (equipo) => {
+  const db = await getConnection();
+  const result = await db.runAsync(
+    'INSERT INTO equipo (nombre, entrenadorID) VALUES (?, ?)',
+    [equipo.nombre, equipo.entrenadorID]);
+  return result.lastInsertRowId;
+}

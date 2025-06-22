@@ -50,3 +50,11 @@ export const getJugadoresEquipo = async (equipoID) => {
   const rows = await db.getAllAsync('SELECT * FROM jugador WHERE equipoID = ?', [equipoID]);
   return rows;
 }
+
+export const addJugador = async (jugador) => {
+  const db = await getConnection();
+  const result = await db.runAsync(
+    'INSERT INTO jugador (nombre, posicion, nroCamiseta, edad, equipoID) VALUES (?, ?, ?, ?, ?);',
+    [jugador.nombre, jugador.posicion, jugador.nroCamiseta, jugador.edad, jugador.equipoID]);
+  return result.lastInsertRowId;
+}
