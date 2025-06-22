@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { Alert, FlatList, StyleSheet, Text, View, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { rankingEquipos } from '../database/EquipoRepository.js';
@@ -30,6 +29,7 @@ function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <Text style={styles.title}>Ranking</Text>
       <View style={styles.headerRanking}>
         <Text style={styles.titleRanking}>Rank</Text>
@@ -49,8 +49,7 @@ function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight
+    flex: 1
   },
   title: {
     fontSize: 40,
