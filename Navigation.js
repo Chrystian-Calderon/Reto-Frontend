@@ -12,9 +12,11 @@ import HistorialScreen from "./screens/HistorialScreen";
 import EquiposScreen from "./screens/EquiposScreen";
 import AddEquipoScreen from "./screens/AddEquipoScreen";
 import PartidosScreen from "./screens/PartidosScreen";
+import SimulacionScreen from "./screens/SimulacionScreen";
 
 const StackHome = createNativeStackNavigator();
 const StackEquipos = createNativeStackNavigator();
+const StackPartidos = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 function HomeStack() {
@@ -46,6 +48,21 @@ function EquiposStack() {
       <StackEquipos.Screen name="Equipo" component={EquipoScreen} />
       <StackEquipos.Screen name="AgregarEquipo" component={AddEquipoScreen} />
     </StackEquipos.Navigator>
+  );
+}
+
+function PartidosStack() {
+  return (
+    <StackPartidos.Navigator initialRouteName="PartidosScreen">
+      <StackPartidos.Screen
+        name="PartidosScreen"
+        component={PartidosScreen}
+        options={{
+          headerShown: false
+        }}
+      />
+      <StackPartidos.Screen name="Simulacion" component={SimulacionScreen} />
+    </StackPartidos.Navigator>
   );
 }
 
@@ -87,12 +104,13 @@ function BottomTabs() {
       />
       <Tabs.Screen
         name="Partidos"
-        component={PartidosScreen}
+        component={PartidosStack}
         options={{
           tabBarLabel: 'Partidos',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="soccer" size={size} color={color} />
-          )
+          ),
+          headerShown: false,
         }}
       />
     </Tabs.Navigator>
