@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Button, Image, FlatList, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { useEffect, useState } from "react";
+import { View, Text, TextInput, Button, Image, FlatList, StyleSheet, Alert } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
 import { getEntrenadoresSinEquipo } from "../database/EntrenadorRepository";
@@ -45,12 +45,10 @@ function AddEquipoScreen() {
       return;
     }
     try {
-      // 1. Crear equipo
       const equipoID = await addEquipo({
         nombre: nombreEquipo,
         entrenadorID: entrenadorSeleccionado
       });
-      // 2. Insertar jugadores
       for (const j of jugadores) {
         try {
           await addJugador({

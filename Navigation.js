@@ -81,7 +81,8 @@ function BottomTabs() {
           tabBarLabel: 'Jugadores',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome6 name="person-running" size={size} color={color} />
-          )
+          ),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
