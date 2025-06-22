@@ -1,18 +1,21 @@
-import { Alert, FlatList, StyleSheet, Text, TextInput, View } from "react-native";
+import { useEffect, useState } from "react";
+import React, { Alert, FlatList, StyleSheet, Text, TextInput, View } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import CardJugador from "../components/CardJugador.js";
 import { getJugadores } from "../database/JugadorRepository";
-import { useEffect, useState } from "react";
 
 function JugadoresScreen() {
   const [jugadores, setJugadores] = useState([]);
   const [filterJugadores, setFilterJugadores] = useState([]);
   const [searchJugador, onSearchJugador] = useState('');
 
-  useEffect(() => {
-    loadJugadores();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadJugadores();
+    }, [])
+  );
 
   const loadJugadores = async () => {
     try {

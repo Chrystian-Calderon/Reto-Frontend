@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Alert, FlatList, TextInput, StatusBar, TouchableOpacity } from "react-native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { getEquipos } from "../database/EquipoRepository";
 import CardEquipo from "../components/CardEquipo";
-import { useNavigation } from "@react-navigation/native";
 
 function EquiposScreen() {
   const navigation = useNavigation();
@@ -12,9 +12,11 @@ function EquiposScreen() {
   const [filterData, setFilterData] = useState([]);
   const [searchEquipo, onSearchEquipo] = useState('');
 
-  useEffect(() => {
-    loadEquipos();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadEquipos();
+    }, [])
+  );
 
   const loadEquipos = async () => {
     try {

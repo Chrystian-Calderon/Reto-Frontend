@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, FlatList, StyleSheet, Text, View, StatusBar } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { rankingEquipos } from '../database/EquipoRepository.js';
 import CardRank from "../components/CardRank.js";
@@ -9,9 +9,11 @@ function HomeScreen() {
   const navigation = useNavigation();
   const [ranking, setRanking] = useState([]);
 
-  useEffect(() => {
-    loadRanking();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadRanking();
+    }, [])
+  );
 
   const loadRanking = async () => {
     try {
